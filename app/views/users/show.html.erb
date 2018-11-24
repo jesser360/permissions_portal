@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<h2>USER - <%=@user['name']%><br></h2>
+<span>-Email Permissions: <%=@user['email']%></span><br>
+<span>-User Permissions: <%=@user['user_permissions']%></span>
+<br><%= link_to 'Edit User', edit_user_path(@user) %>
+<br><hr>
+
+<%= link_to 'Back to Group', group_path(@user['group_id']) %>

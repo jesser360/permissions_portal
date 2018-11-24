@@ -1,0 +1,31 @@
+<%@group['group_name'] == nil ? ((@method='post') && @url=('/groups')) : ((@method='patch') && @url=("/groups/#{@group_id}"))%>
+  <%= form_for(@group, :method => @method, :url=> @url, local: true) do |form| %>
+  <% if group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+      <% group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <label>Company: <strong><%=@company_name%></strong></label>
+  <br>
+  <div class="actions">
+    <%= form.label :group_name %>
+    <%= form.text_field :group_name %>
+    <%= form.label :group_permissions %>
+    <%= form.text_field :group_permissions %>
+    <%= form.hidden_field :company_id, :value => @group.company_id || @company_id%>
+    <%= form.hidden_field :group_id, :value => @group_id %>
+    <%= form.submit "Submit" %>
+
+  </div>
+  <%if @group['group_name'] == nil%>
+    <%= link_to 'Back to company', company_path(@company_id) %>
+  <%else%>
+    <%= link_to 'Back to Group', group_path(@group) %>
+  <%end%>
+<% end %>

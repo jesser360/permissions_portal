@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+<h2>COMPANY - <%=@company['company_name']%></h2>
+<%= link_to 'Edit Company', edit_company_path(@company['id'].to_int) %>
+<br>
+<h4>Groups</h4>
+<ol>
+<%@groups.each_with_index do |group,i|%>
+  <li>
+    <%=link_to group['group_name'], group_path(group['id'])%><br>
+    <span>Permissions: <%=group['group_permissions']%></span>
+  </li>
+  <br>
+<%end%>
+</ol>
+<br>
+<%= link_to 'New Group', new_group_path(:company_id => (@company['id'].to_int), :company_name =>@company['company_name']) %><br><hr>
+<br>
+<%= link_to 'Back to All Companies', companies_path %><br><hr>
+<br>

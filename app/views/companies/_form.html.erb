@@ -1,0 +1,21 @@
+<%@company['company_name'] == nil ? ((@method='post') && @url=('/companies')) : ((@method='patch') && @url=("/companies/#{@company_id}"))%>
+  <%= form_for(@company, :method => @method, :url=> @url, local: true) do |form| %>
+  <% if company.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+      <ul>
+      <% company.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= form.label :company_name %>
+    <%= form.text_field :company_name %>
+    <%= form.hidden_field :company_id, :value => @company_id %>
+    <%= form.submit "Submit" %>
+  </div>
+
+<% end %>

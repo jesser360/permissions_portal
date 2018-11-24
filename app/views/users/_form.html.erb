@@ -1,0 +1,29 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <label>Group: <strong><%=@group_name%></strong></label>
+  <br>
+  <div class="actions">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+    <%= form.label :user_permissions %>
+    <%= form.text_field :user_permissions %>
+    <%= form.hidden_field :password_digest, :value => 'password123!' %>
+    <%= form.hidden_field :group_id, :value => @group_id %>
+    <%= form.submit "Submit" %>
+  </div>
+  <%= link_to 'Back to group', group_path(@group_id) %>
+
+<% end %>
